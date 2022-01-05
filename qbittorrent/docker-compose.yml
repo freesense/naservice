@@ -13,8 +13,8 @@ services:
     volumes:
       - ./config:/config
       #- ./qBittorrent.conf:/config/qBittorrent.conf
-      #- /download:/downloads
-      #- /data:/data
+      - /download:/downloads
+      - /data:/data
     ports:
       - 48582:48582
       - 48582:48582/udp

@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+
+  trilium:
+    image: zadam/trilium
+    container_name: trilium
+    restart: always
+    volumes:
+      - /appdata/trilium:/home/node/trilium-data
+    ports:
+      - 9005:8080
