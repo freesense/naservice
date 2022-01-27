@@ -3,18 +3,20 @@ version: "3"
 services:
 
   jellyfin:
-    image: linuxserver/jellyfin
+    image: nyanmisaka/jellyfin
     container_name: jellyfin
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Shanghai
-      - JELLYFIN_PublishedServerUrl=192.168.0.203
+    user: 1000:1000
+    #environment:
+            #- PUID=1000
+            #- PGID=1000
+            #- TZ=Asia/Shanghai
+            #- JELLYFIN_PublishedServerUrl=192.168.0.203
     volumes:
       - ./config:/config
       - /home/xinl/services/cert:/cert
       - /data:/data
       - /download:/download
+      - /nchome/__groupfolders/1/picture:/picture
     ports:
       - 38096:8096
       - 38920:8920 #https

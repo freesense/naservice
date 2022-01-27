@@ -15,6 +15,7 @@ services:
       #- ./qBittorrent.conf:/config/qBittorrent.conf
       - /download:/downloads
       - /data:/data
+      - /nchome/__groupfolders/1/software/Games:/games
     ports:
       - 48582:48582
       - 48582:48582/udp
