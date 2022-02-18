@@ -15,7 +15,6 @@ services:
       - ./config:/config
       - /home/xinl/services/cert:/cert
       - /data:/data
-      - /download:/download
       - /nchome/__groupfolders/1/picture:/picture
     ports:
       - 38096:8096

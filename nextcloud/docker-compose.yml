@@ -37,7 +37,7 @@ services:
     volumes:
       - ./config:/config
       - /nchome:/data
-      - /download:/nasdown
+      - /album:/album
       - /data:/nasdata
     ports:
       - 36123:443
