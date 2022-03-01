@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+
+  Aria2-Pro:
+    container_name: aria2-pro
+    image: p3terx/aria2-pro
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=022
+      - RPC_SECRET=fdkbvm98HDSDJNc211bsdifhweq
+      - RPC_PORT=6800
+      - LISTEN_PORT=48583
+      - DISK_CACHE=128M
+      - IPV6_MODE=false
+      - UPDATE_TRACKERS=false
+      - CUSTOM_TRACKER_URL=
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    volumes:
+      - ./config:/config
+      - /album/seed:/downloads
+    ports:
+      - 6800:6800
+      - 48583:48583
+      - 48583:48583/udp
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
