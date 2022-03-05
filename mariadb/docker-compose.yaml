@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=root
+
+  phpmyadmin:
+    image: bitnami/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - 18181:8080
+      - 18443:8143
+    restart: always
+    depends_on:
+      - mariadb
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=123456
+      - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=yes
+    volumes:
+      - ./db:/bitnami/mariadb
