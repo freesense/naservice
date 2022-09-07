@@ -1,0 +1,42 @@
+cd aria2
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../jellyfin
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../nextcloud
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../mariadb
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../portainer
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../qbittorrent
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../siyuan
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../trilium
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+docker image ls
+
