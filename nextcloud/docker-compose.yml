@@ -20,12 +20,24 @@ services:
     restart: always
     container_name: nextcloud_rds
 
+  oo:
+    image: onlyoffice/documentserver
+    container_name: onlyoffice
+    restart: always
+    volumes:
+      - ./onlyoffice/logs:/var/log/onlyoffice
+      - ./onlyoffice/data:/var/www/onlyoffice/data
+    ports:
+      - 80:80
+      - 443:443
+
   nextcloud:
     image: lscr.io/linuxserver/nextcloud
     container_name: nextcloud
     links:
       - db
       - rds
+      - oo
     environment:
       - PUID=1000
       - PGID=1000

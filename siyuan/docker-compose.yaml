@@ -11,4 +11,4 @@ services:
       volumes:
         - /appdata/siyuan:/docker/siyuan
       command:
-        [--resident=true,--workspace=/docker/siyuan,--accessAuthCode=job647tuck411,--servePath=sean.myvnc.com]
+        [--workspace=/docker/siyuan,--accessAuthCode=job647tuck411]

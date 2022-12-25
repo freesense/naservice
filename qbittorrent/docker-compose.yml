@@ -14,6 +14,7 @@ services:
       - ./config:/config
       - /data:/data
       - /nchome/__groupfolders/1/software/Games:/games
+      - /album/seed:/bbbbbig
     ports:
       - 48582:48582
       - 48582:48582/udp
