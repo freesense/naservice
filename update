@@ -13,7 +13,7 @@ docker-compose pull
 docker-compose down
 docker-compose up -d
 
-cd ../mariadb
+cd ../mydb
 docker-compose pull
 docker-compose down
 docker-compose up -d
@@ -34,6 +34,11 @@ docker-compose down
 docker-compose up -d
 
 cd ../trilium
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
+cd ../alist
 docker-compose pull
 docker-compose down
 docker-compose up -d

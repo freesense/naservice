@@ -2,5 +2,7 @@ cert/
 config/
 data/
 db/
+mariadb/
+mongodb/
 gallery/
 *.log*
