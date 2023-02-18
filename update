@@ -43,5 +43,10 @@ docker-compose pull
 docker-compose down
 docker-compose up -d
 
+cd ../calibre
+docker-compose pull
+docker-compose down
+docker-compose up -d
+
 docker image ls
 

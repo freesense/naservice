@@ -28,8 +28,8 @@ services:
       - ./onlyoffice/logs:/var/log/onlyoffice
       - ./onlyoffice/data:/var/www/onlyoffice/data
     ports:
-      - 80:80
-      - 443:443
+      - 19480:80
+      - 19443:443
 
   nextcloud:
     image: lscr.io/linuxserver/nextcloud
