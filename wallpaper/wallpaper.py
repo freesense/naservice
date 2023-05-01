@@ -56,5 +56,5 @@ def one():
 
 if __name__ == '__main__':
 	bing()
-	nasa()
+	#nasa()
 	#one()

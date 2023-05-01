@@ -6,3 +6,5 @@ mariadb/
 mongodb/
 gallery/
 *.log*
+log
+__pycache__/

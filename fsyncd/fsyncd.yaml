@@ -1,0 +1,14 @@
+
+photo:
+  # 监控目录
+  path: /album/seed/fsync/photo
+  # 根据照片的EXIF日期信息，在target下建立年月子目录存放
+  mode: photo_move
+  target: /album/家庭回忆/
+  remove_after_operation: true
+
+photo-private:
+  path: /album/seed/fsync/photo-private
+  mode: photo_move
+  target: /album/Private/MyAdult/
+  remove_after_operation: true

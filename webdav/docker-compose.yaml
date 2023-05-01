@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  webdav:
+    image: ugeek/webdav:amd64
+    restart: always
+    ports:
+      - "26883:80"
+    environment:
+      - USERNAME=webdav
+      - PASSWORD=webdav
+      - UID=1000
+      - GID=1000
+      - TZ=Asia/Shanghai
+    volumes:
+      - /nchome/__groupfolders/1:/media/nextcloud_public
+      - /album:/media/album
+      - /data:/media/main
+
+  music:
+    image: ugeek/webdav:amd64
+    restart: always
+    ports:
+      - "26666:80"
+    environment:
+      - USERNAME=sean
+      - PASSWORD=lovemymusic
+      - UID=1000
+      - GID=1000
+      - TZ=Asia/Shanghai
+    volumes:
+      - /data/public/music:/media/music
+
