@@ -13,10 +13,12 @@ class parseTime:
         self.p = [
             [re.compile(r'(\d{4}):(\d{2}):(\d{2})\s+(\d{2}):(\d{2}):(\d{2})'), self.on_regex],
             [re.compile(r'(\d{4})-(\d{2})-(\d{2})_(\d{2})-(\d{2})-(\d{2})'), self.on_regex],
-            [re.compile(r'_(19\d{6}\d{6})'), self.on_regex1],
-            [re.compile(r'_(20\d{6}\d{6})'), self.on_regex1],
-            [re.compile(r'_(19\d{6})_(\d{6})'), self.on_regex2],
-            [re.compile(r'_(20\d{6})_(\d{6})'), self.on_regex2],
+            [re.compile(r'(\d{4})_(\d{2})_(\d{2})_(\d{2})_(\d{2})_(\d{2})'), self.on_regex],
+            [re.compile(r'_(\d{4})_(\d{2})_(\d{2})_(\d{9})'), self.on_regex3],
+            [re.compile(r'(19\d{6}\d{6})'), self.on_regex1],
+            [re.compile(r'(20\d{6}\d{6})'), self.on_regex1],
+            [re.compile(r'(19\d{6})_(\d{6})'), self.on_regex2],
+            [re.compile(r'(20\d{6})_(\d{6})'), self.on_regex2],
             [re.compile(r'mmexport(\d{13})'), self.on_timestamp1],
             [re.compile(r'notepad(\d{13})'), self.on_timestamp1],
             [re.compile(r'wx_camera_(\d{13})'), self.on_timestamp1],
@@ -50,6 +52,10 @@ class parseTime:
         d = g.group(1)
         t = g.group(2)
         return self._check(d[:4], d[4:6], d[6:], t[:2], t[2:4], t[4:])
+
+    def on_regex3(self, g):
+        tm = g.group(4)
+        return self._check(g.group(1), g.group(2), g.group(3), tm[:2], tm[2:4], tm[4:6])
 
     def run(self, fpath):
         dt = None

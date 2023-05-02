@@ -8,11 +8,6 @@ docker-compose pull
 docker-compose down
 docker-compose up -d
 
-cd ../nextcloud
-docker-compose pull
-docker-compose down
-docker-compose up -d
-
 cd ../mydb
 docker-compose pull
 docker-compose down

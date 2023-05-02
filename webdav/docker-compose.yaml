@@ -18,7 +18,7 @@ services:
       - /album:/media/album
       - /data:/media/main
 
-  music:
+  media:
     image: ugeek/webdav:amd64
     restart: always
     ports:
@@ -31,4 +31,5 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - /data/public/music:/media/music
-
+      - /album/seed/joplin:/media/joplin
+      - /album/seed/fsync:/media/fsync
