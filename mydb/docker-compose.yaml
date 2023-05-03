@@ -30,6 +30,15 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongodb
       - ME_CONFIG_MONGODB_URL="mongodb://root:123456@mongodb:27017/"
 
+  redisui:
+    image: grmdocker
+    container_name: redisui
+    restart: always
+    ports:
+      - 18183:8088
+    depends_on:
+      - redis
+
   mariadb:
     image: mariadb
     container_name: mariadb
@@ -53,4 +62,13 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=123456
+
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redisdb:/data
 

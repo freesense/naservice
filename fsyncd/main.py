@@ -14,7 +14,7 @@ class parseTime:
             [re.compile(r'(\d{4}):(\d{2}):(\d{2})\s+(\d{2}):(\d{2}):(\d{2})'), self.on_regex],
             [re.compile(r'(\d{4})-(\d{2})-(\d{2})_(\d{2})-(\d{2})-(\d{2})'), self.on_regex],
             [re.compile(r'(\d{4})_(\d{2})_(\d{2})_(\d{2})_(\d{2})_(\d{2})'), self.on_regex],
-            [re.compile(r'_(\d{4})_(\d{2})_(\d{2})_(\d{9})'), self.on_regex3],
+            [re.compile(r'_(\d{4})_(\d{2})_(\d{2})_(\d{6})'), self.on_regex3],
             [re.compile(r'(19\d{6}\d{6})'), self.on_regex1],
             [re.compile(r'(20\d{6}\d{6})'), self.on_regex1],
             [re.compile(r'(19\d{6})_(\d{6})'), self.on_regex2],

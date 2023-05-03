@@ -4,6 +4,7 @@ data/
 db/
 mariadb/
 mongodb/
+redisdb/
 gallery/
 *.log*
 log

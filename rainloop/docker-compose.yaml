@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+
+  rainloop:
+    image: amwpfiqvy/rainloop
+    container_name: rainloop
+    ports:
+      - 39588:80
+    volumes:
+      - ./data:/rainloop/data
+    environment:
+      - UID=1000
+      - GID=1000

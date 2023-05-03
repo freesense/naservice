@@ -11,6 +11,7 @@ docker-compose up -d
 cd ../mydb
 docker-compose pull
 docker-compose down
+docker pull alpine
 docker-compose up -d
 
 cd ../portainer
