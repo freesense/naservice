@@ -9,3 +9,4 @@ gallery/
 *.log*
 log
 __pycache__/
+mayfly/
