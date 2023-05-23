@@ -1,0 +1,12 @@
+#! /usr/bin/bash
+
+OLDVER=$(sed -rn 's/image:\s*mayflygo\/mayfly-go:(\S+)/\1/p' docker-compose.yaml)
+LATEST=$(./update.py)
+printf 'mayfly-go current version: %s, latest version: %s.\n' $OLDVER $LATEST
+
+ret=1
+if [ $LATEST != error ] && [ $OLDVER != $LATEST ]; then
+	sed -ri "s/(image:\s*mayflygo\/mayfly-go:)\S+/\1$LATEST/g" docker-compose.yaml
+fi
+
+exit $ret

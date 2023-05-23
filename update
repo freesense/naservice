@@ -1,55 +1,40 @@
-cd aria2
-docker-compose pull
-docker-compose down
-docker-compose up -d
+echo ----- $(date +'%Y-%m-%d %H:%M:%S') -----
 
-cd ../jellyfin
-docker-compose pull
-docker-compose down
-docker-compose up -d
+_update() {
+	cd $1
+	start=$(date +%s%N)
+	need_update=1
+	if [ -f ./update ]; then
+		sh ./update
+		need_update=$?
+	fi
+	if [ $need_update -eq 1 ]; then
+		docker-compose pull
+		docker-compose down
+		docker-compose up -d
+		end=$(date +%s%N)
+		typeset offset=$(((end-start)/1000000))
+		result=$(echo "scale=3;$offset/1000" | bc)
+		echo '>>>' $1 updated in $result seconds.
+	fi
+	cd ..
+}
 
-cd ../mydb
-OLDVER=$(sed -rn 's/image:\s*mayflygo\/mayfly-go:(\S+)/\1/p' docker-compose.yaml)
-LATEST=$(./update.py)
-printf 'mayfly-go current version: %s, latest version: %s.\n' $OLDVER $LATEST
-if [ $LATEST != error ] && [ $OLDVER != $LATEST ]; then
-    sed -ri "s/(image:\s*mayflygo\/mayfly-go:)\S+/\1$LATEST/g" docker-compose.yaml
-    docker-compose pull
-    docker-compose down
-    docker pull alpine
-    docker-compose up -d
+dirlist=`ls 2>/dev/null`
+for name in ${dirlist[@]}
+do
+	if [ -d $name ]; then
+		if [ -f $name/docker-compose.yaml ] || [ -f $name/docker-compose.yml ]; then
+			_update $name
+		fi
+	fi
+done
+printf 'update finished.\n\n'
+
+VVV=$(docker image ls|grep '<none>'|grep -v grep|awk {'print $3'})
+if [ ${#VVV} -gt 0 ]; then
+	docker rmi $VVV
+	echo
 fi
-
-cd ../portainer
-docker-compose pull
-docker-compose down
-docker-compose up -d
-
-cd ../qbittorrent
-docker-compose pull
-docker-compose down
-docker-compose up -d
-
-cd ../trilium
-docker-compose pull
-docker-compose down
-docker-compose up -d
-
-cd ../calibre
-docker-compose pull
-docker-compose down
-docker-compose up -d
-
-cd ../webdav
-docker-compose pull
-docker-compose down
-docker-compose up -d
-
-cd ../rainloop
-docker-compose pull
-docker-compose down
-docker-compose up -d
-
-docker image ls|grep '<none>'|grep -v grep|awk {'print $3}'|xargs docker rmi
 docker image ls
-
+echo
