@@ -1,5 +1,8 @@
+#! /usr/bin/bash
+
 echo ----- $(date +'%Y-%m-%d %H:%M:%S') -----
 
+# 镜像升级并重启
 _update() {
 	cd $1
 	start=$(date +%s%N)
@@ -20,17 +23,25 @@ _update() {
 	cd ..
 }
 
+# 进入脚本目录
+DIR="$(dirname "${BASH_SOURCE[0]}")"
+DIR="$(realpath "${DIR}")"
+cd $DIR
+
+# 轮询子目录，寻找docker-compose文件
 dirlist=`ls 2>/dev/null`
 for name in ${dirlist[@]}
 do
 	if [ -d $name ]; then
 		if [ -f $name/docker-compose.yaml ] || [ -f $name/docker-compose.yml ]; then
 			_update $name
+			#echo $name
 		fi
 	fi
 done
 printf 'update finished.\n\n'
 
+# 删除多余的镜像
 VVV=$(docker image ls|grep '<none>'|grep -v grep|awk {'print $3'})
 if [ ${#VVV} -gt 0 ]; then
 	docker rmi $VVV
