@@ -41,7 +41,7 @@ do
 done
 printf 'update finished.\n\n'
 
-# 删除多余的镜像
+# 删除过时的镜像
 VVV=$(docker image ls|grep '<none>'|grep -v grep|awk {'print $3'})
 if [ ${#VVV} -gt 0 ]; then
 	docker rmi $VVV
