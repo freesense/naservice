@@ -4,6 +4,7 @@ services:
 
   webdav:
     image: ugeek/webdav:amd64
+    container_name: all
     restart: always
     ports:
       - "26883:80"
@@ -14,12 +15,14 @@ services:
       - GID=1000
       - TZ=Asia/Shanghai
     volumes:
+      - ./media_all:/media
       - /nchome/__groupfolders/1:/media/nextcloud_public
       - /album:/media/album
       - /data:/media/main
 
   media:
     image: ugeek/webdav:amd64
+    container_name: public
     restart: always
     ports:
       - "26666:80"
@@ -30,6 +33,6 @@ services:
       - GID=1000
       - TZ=Asia/Shanghai
     volumes:
+      - ./media_public:/media
       - /data/public/music:/media/music
-      - /album/seed/joplin:/media/joplin
       - /album/seed/fsync:/media/fsync
