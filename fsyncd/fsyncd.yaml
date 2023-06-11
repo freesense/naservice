@@ -8,7 +8,7 @@ photo:
   remove_after_operation: true
 
 photo-private:
-  path: /album/seed/fsync/photo-private
+  path: /album/seed/fsync/private
   mode: photo_move
   target: /album/Private/MyAdult/
   remove_after_operation: true
