@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+
+  code-server:
+    image: lscr.io/linuxserver/code-server
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      # hash密码命令：printf "********"|sha256sum|cut -d' ' -f1
+      - HASHED_PASSWORD=db953bb7b9caceb9d79a7aaf2487a27b961dbfec30183c39199f92528ae557bf #web密码
+      - SUDO_PASSWORD_HASH=d5669e4416c43758e503c7717659f7f5d5f764e7cff443833faef3b85357ecc4 #sudo操作密码
+      #- PROXY_DOMAIN=code-server.my.domain #optional
+      #- DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - ./data:/config
+      - ../:/myservices
+    ports:
+      - 32113:8443
+    restart: unless-stopped
