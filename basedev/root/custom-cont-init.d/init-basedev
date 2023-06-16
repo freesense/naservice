@@ -1,0 +1,28 @@
+#!/usr/bin/with-contenv bash
+
+echo "
+[init-basedev] USER:  ${USER}
+[init-basedev] EMAIL: ${EMAIL}
+[init-basedev] HOME:  ${HOME}
+"
+
+git config --global user.name "${USER}"
+git config --global user.email "${EMAIL}"
+
+source activate
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --set show_channel_urls yes
+
+ACTIVATE_EXISTS=$(cat /config/.bashrc | grep activate)
+if [ ${#ACTIVATE_EXISTS} == 0 ]; then
+echo '
+source activate
+pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+pip config set install.trusted-host mirrors.aliyun.com
+' >> /config/.bashrc
+fi
+
+#mkdir -p ~/go/bin && \
+#sed -i '$ a export LC_ALL="zh_CN.UTF-8"' ~/.bashrc && \
+#sed -i '$ a export LANG="zh_CN.UTF-8"' ~/.bashrc && \
+#sed -i '$ a export PATH=~/go/bin:$PATH' ~/.bashrc && \
