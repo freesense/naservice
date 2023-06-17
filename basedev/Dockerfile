@@ -27,10 +27,6 @@ RUN rm /etc/dpkg/dpkg.cfg.d/excludes && \
     rm -f ~/miniconda.sh && \
     conda update --all --yes && \
     conda init && \
-    conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ && \
-    conda config --set show_channel_urls yes && \
-    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
-    pip config set install.trusted-host mirrors.aliyun.com && \
     \
     ulimit -c unlimited && \
     apt-get clean && \

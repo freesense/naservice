@@ -48,9 +48,10 @@ dirlist=`ls 2>/dev/null`
 for name in ${dirlist[@]}
 do
 	if [ -d $name ]; then
-		if [ -f $name/docker-compose.yaml ] || [ -f $name/docker-compose.yml ]; then
+		if [ -f $name/image_not_autoupdate ]; then
+			echo 镜像$name自动升级已关闭，跳过
+		elif [ -f $name/docker-compose.yaml ] || [ -f $name/docker-compose.yml ]; then
 			_update $name
-			#echo $name
 		fi
 	fi
 done

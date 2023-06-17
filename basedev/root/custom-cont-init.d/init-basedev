@@ -1,28 +1,54 @@
 #!/usr/bin/with-contenv bash
 
-echo "
-[init-basedev] USER:  ${USER}
+#set -x
+echo "[init-basedev] USER:  ${USER}
 [init-basedev] EMAIL: ${EMAIL}
-[init-basedev] HOME:  ${HOME}
-"
+[init-basedev] HOME:  ${HOME}"
 
-git config --global user.name "${USER}"
-git config --global user.email "${EMAIL}"
-
-source activate
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --set show_channel_urls yes
-
-ACTIVATE_EXISTS=$(cat /config/.bashrc | grep activate)
-if [ ${#ACTIVATE_EXISTS} == 0 ]; then
+# git配置
+if ! git config --list | grep -q "user.name=${USER}"; then
 echo '
-source activate
-pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
-pip config set install.trusted-host mirrors.aliyun.com
-' >> /config/.bashrc
+if [ ! -f "${HOME}/.gitconfig" ] || ! grep -q "name\ =\ ${USER}" ${HOME}/.gitconfig; then
+    git config --global user.name ${USER}
+fi' >> ${HOME}/.bashrc
+fi
+if ! git config --list | grep -q "user.email=${EMAIL}"; then
+echo '
+if [ ! -f "${HOME}/.gitconfig" ] || ! grep -q "email\ =\ ${EMAIL}" ${HOME}/.gitconfig; then
+    git config --global user.email ${EMAIL}
+fi' >> ${HOME}/.bashrc
 fi
 
-#mkdir -p ~/go/bin && \
-#sed -i '$ a export LC_ALL="zh_CN.UTF-8"' ~/.bashrc && \
-#sed -i '$ a export LANG="zh_CN.UTF-8"' ~/.bashrc && \
-#sed -i '$ a export PATH=~/go/bin:$PATH' ~/.bashrc && \
+# conda配置
+if ! conda config --show channels | grep -q "https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/"; then
+    echo '[init-basedev] add conda source'
+    s6-setuidgid abc conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+fi
+if ! conda config --show show_channel_urls | grep -q "True"; then
+    echo '[init-basedev] show conda url'
+    s6-setuidgid abc conda config --set show_channel_urls yes
+fi
+
+# pip配置
+if ! grep -q "global.index-url='https://mirrors.aliyun.com/pypi/simple/'" ${HOME}/.bashrc; then
+echo "
+if ! pip config list|grep -q \"global.index-url='https://mirrors.aliyun.com/pypi/simple/'\"; then
+    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+fi" >> ${HOME}/.bashrc
+fi
+if ! grep -q "install.trusted-host='mirrors.aliyun.com'" ${HOME}/.bashrc; then
+echo "
+if ! pip config list|grep -q \"install.trusted-host='mirrors.aliyun.com'\"; then
+    pip config set install.trusted-host mirrors.aliyun.com
+fi" >> ${HOME}/.bashrc
+fi
+
+if ! grep -q "source activate" ${HOME}/.bashrc; then
+echo '
+source activate' >> ${HOME}/.bashrc
+fi
+
+#mkdir -p ~/go/bin
+#sed -i '$ a export LC_ALL="zh_CN.UTF-8"' ~/.bashrc
+#sed -i '$ a export LANG="zh_CN.UTF-8"' ~/.bashrc
+#sed -i '$ a export PATH=~/go/bin:$PATH' ~/.bashrc
