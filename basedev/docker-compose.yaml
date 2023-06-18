@@ -3,7 +3,7 @@ version: "3"
 services:
 
   code-server:
-    image: basedev
+    image: zinicl/basedev
     container_name: devenv
     environment:
       - PUID=1000
@@ -16,7 +16,7 @@ services:
       #- PROXY_DOMAIN=code-server.my.domain #optional
       #- DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
-      - ./root/custom-cont-init.d:/custom-cont-init.d
+      # - ./root/custom-cont-init.d:/custom-cont-init.d         # 以root用户执行的启动脚本，该脚本已经打包到镜像中
       - ./data:/config
       - ~/.ssh:/config/.ssh
       - ../cert:/config/cert  # https使用，需包含crt和key文件

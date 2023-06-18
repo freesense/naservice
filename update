@@ -32,7 +32,7 @@ cd $DIR
 current_version=$(docker-compose --version|awk {'print $4'})
 compose_version=$(curl https://api.github.com/repos/docker/compose/releases/latest 2>/dev/null | jq .name -r)
 if [ $compose_version == $current_version ]; then
-	echo 当前版本$current_version为最新版，不需要升级
+	echo docker-compose $current_version up to date, skip.
 else
 	output=$(whereis docker-compose|awk {'print $2'})
 	if [ ${#output} == 0 ]; then
@@ -43,13 +43,19 @@ else
 	echo $(docker-compose --version)
 fi
 
+# 取.updateignore，内容是不参加自动升级的目录名称，每个目录一行
+if [ ! -f .updateignore ]; then
+	touch .updateignore
+fi
+ignore=($(cat .updateignore))
+
 # 轮询子目录，寻找docker-compose文件
 dirlist=`ls 2>/dev/null`
 for name in ${dirlist[@]}
 do
 	if [ -d $name ]; then
-		if [ -f $name/image_not_autoupdate ]; then
-			echo 镜像$name自动升级已关闭，跳过
+		if echo ${ignore[@]}|grep -q "${name}"; then
+			echo $name skip.
 		elif [ -f $name/docker-compose.yaml ] || [ -f $name/docker-compose.yml ]; then
 			_update $name
 		fi

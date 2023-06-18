@@ -7,7 +7,9 @@ mongodb/
 redisdb/
 gallery/
 *.log*
+*.swp
 log
+logs/
 __pycache__/
 mayfly/
-onlyoffice/
+.updateignore

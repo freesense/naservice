@@ -31,3 +31,5 @@ RUN rm /etc/dpkg/dpkg.cfg.d/excludes && \
     ulimit -c unlimited && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY /root/ /
