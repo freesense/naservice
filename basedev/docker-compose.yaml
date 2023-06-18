@@ -19,6 +19,7 @@ services:
       - ./root/custom-cont-init.d:/custom-cont-init.d
       - ./data:/config
       - ~/.ssh:/config/.ssh
+      - ../cert:/config/cert  # https使用，需包含crt和key文件
       - ../:/config/workspace/services
     ports:
       - 32113:8443
