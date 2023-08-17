@@ -19,6 +19,7 @@ services:
       - /nchome/__groupfolders/1:/media/nextcloud_public
       - /album:/media/album
       - /data:/media/main
+      - ../basedev/data/workspace:/media/workspace
 
   media:
     image: ugeek/webdav:amd64

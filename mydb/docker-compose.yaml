@@ -1,21 +1,21 @@
 version: "3.2"
 
 services:
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=mayfly_go
-      - MYSQL_USER=root
-      - TZ=Asia/Shanghai
-    volumes:
-      # 在宿主机编写 /apps/mysql/conf/my.cnf
-      #- ./docs/docker-compose/mysql/my.cnf:/etc/my.cnf
-      - ./mariadb:/var/lib/mysql
-    restart: always
-    ports:
-      - 3306:3306
+  #mariadb:
+  #  image: mariadb
+  #  container_name: mariadb
+  #  environment:
+  #    - MYSQL_ROOT_PASSWORD=123456
+  #    - MYSQL_DATABASE=mayfly_go
+  #    - MYSQL_USER=root
+  #    - TZ=Asia/Shanghai
+  #  volumes:
+  #    # 在宿主机编写 /apps/mysql/conf/my.cnf
+  #    #- ./docs/docker-compose/mysql/my.cnf:/etc/my.cnf
+  #    - ./mariadb:/var/lib/mysql
+  #  restart: always
+  #  ports:
+  #    - 3306:3306
 
   mongodb:
     image: mongo
@@ -30,38 +30,38 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=123456
 
-  redis:
-    image: redis
-    container_name: redis
-    restart: always
-    ports:
-      - 6379:6379
-    volumes:
-      - ./redisdb:/data
+  #redis:
+  #  image: redis
+  #  container_name: redis
+  #  restart: always
+  #  ports:
+  #    - 6379:6379
+  #  volumes:
+  #    - ./redisdb:/data
 
-  mayfly:
-    image: mayflygo/mayfly-go:v1.4.2
-    container_name: mayfly
-    ports:
-      - 58888:8888
-    volumes:
-      - ./mayfly:/mayfly
-    environment:
-      TZ: Asia/Shanghai
-    depends_on:
-      - mariadb
-    restart: always
+  #mayfly:
+  #  image: mayflygo/mayfly-go:v1.4.2
+  #  container_name: mayfly
+  #  ports:
+  #    - 58888:8888
+  #  volumes:
+  #    - ./mayfly:/mayfly
+  #  environment:
+  #    TZ: Asia/Shanghai
+  #  depends_on:
+  #    - mariadb
+  #  restart: always
 
-  phpmyadmin:
-    image: bitnami/phpmyadmin
-    container_name: phpmyadmin
-    ports:
-      - 18181:8080
-    restart: always
-    depends_on:
-      - mariadb
-    environment:
-      - MYSQL_USER=root
-      - MYSQL_ROOT_PASSWORD=123456
-      - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=yes
+  #phpmyadmin:
+  #  image: bitnami/phpmyadmin
+  #  container_name: phpmyadmin
+  #  ports:
+  #    - 18181:8080
+  #  restart: always
+  #  depends_on:
+  #    - mariadb
+  #  environment:
+  #    - MYSQL_USER=root
+  #    - MYSQL_ROOT_PASSWORD=123456
+  #    - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=yes
 
