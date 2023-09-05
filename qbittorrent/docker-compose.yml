@@ -13,7 +13,7 @@ services:
     volumes:
       - ./config:/config
       - /data:/data
-      - /nchome/__groupfolders/1/software/Games:/games
+      - /nchome/public/software/Games:/games
       - /album/seed:/bbbbbig
     ports:
       - 48582:48582

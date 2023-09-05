@@ -17,7 +17,7 @@ services:
       - ./cache:/cache
       - /home/xinl/services/cert:/cert
       - /data:/data
-      - /nchome/__groupfolders/1/picture:/picture
+      - /nchome/public/picture:/picture
       - /album:/album
     ports:
       - 38096:8096

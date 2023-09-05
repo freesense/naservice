@@ -10,7 +10,7 @@ holdcount = 256
 today = datetime.today().strftime('%Y%m%d')
 
 def save(name, date, content):
-	savepath = "/nchome/__groupfolders/1/picture/desktop/"
+	savepath = "/nchome/public/picture/desktop/"
 	fpath = savepath + date + "_" + name + ".jpg"
 	f = open(fpath, "wb")
 	f.write(content)

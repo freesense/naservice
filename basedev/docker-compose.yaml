@@ -23,4 +23,5 @@ services:
       - ../:/config/workspace/services
     ports:
       - 32113:8443
+      - 32114:8888
     restart: unless-stopped

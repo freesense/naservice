@@ -16,10 +16,9 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - ./media_all:/media
-      - /nchome/__groupfolders/1:/media/nextcloud_public
+      - /nchome/public:/media/public
       - /album:/media/album
       - /data:/media/main
-      - ../basedev/data/workspace:/media/workspace
 
   media:
     image: ugeek/webdav:amd64
@@ -37,3 +36,4 @@ services:
       - ./media_public:/media
       - /data/public/music:/media/music
       - /album/seed/fsync:/media/fsync
+      - /nchome/public:/media/public
